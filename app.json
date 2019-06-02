@@ -1,0 +1,34 @@
+{
+  "expo": {
+    "name": "Altair",
+    "slug": "altair",
+    "privacy": "public",
+    "sdkVersion": "32.0.0",
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "version": "0.0.1",
+    "orientation": "portrait",
+    "icon": "./assets/logo.png",
+    "splash": {
+      "image": "./assets/logo.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0990d0"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.bddev.altair",
+      "buildNumber": "2",
+      "config": {
+        "usesNonExemptEncryption": false
+      }
+    }
+  }
+}
