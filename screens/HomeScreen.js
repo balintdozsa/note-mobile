@@ -54,12 +54,18 @@ export default class HomeScreen extends React.Component {
 			<View>
 				<Button
 					onPress={() => { pushNotifications.test() }}
-					title="Learn More"
+					title="Notifi"
 					color="#841584"
-					accessibilityLabel="Learn more about this purple button"
+					accessibilityLabel=""
+				/>
+				<Button
+					onPress={() => { pushNotifications.test2() }}
+					title="Notifi 2"
+					color="#841584"
+					accessibilityLabel=""
 				/>
 				<Text>
-					2019-06-03 9:45
+					2019-06-03 10:17
         		</Text>
 			</View>
 		);
