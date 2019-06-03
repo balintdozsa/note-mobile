@@ -2,6 +2,9 @@ import React from 'react';
 import { Platform, StatusBar, StyleSheet, Text, View } from 'react-native';
 import AppNavigator from './navigation/AppNavigator';
 
+import { pushNotifications } from './notifications';
+pushNotifications.configure();
+
 export default class App extends React.Component {
   state = {
     isLoadingComplete: false,
