@@ -5,14 +5,16 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 import Colors from '../constants/Colors';
 
 import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../screens/HomeScreen';
+import HomeMain from '../screens/home/HomeMain';
+import HomeSub from '../screens/home/HomeSub'
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 
 const SubStack = createStackNavigator({
-	Main: {
-		screen: HomeScreen,
+	HomeMain: {
+		screen: HomeMain,
 	},
+	HomeSub: HomeSub,
 	/*NewActivity: {
 		screen: NewActivityScreen,
 	},
@@ -25,118 +27,118 @@ const SubStack = createStackNavigator({
 	});
 
 const HomeStack = createStackNavigator({
-  Sub: SubStack,
+	Sub: SubStack,
 }, {
-  defaultNavigationOptions: {
-    header: null,
-    headerMode: 'none',
-  },
-});
+		defaultNavigationOptions: {
+			header: null,
+			headerMode: 'none',
+		},
+	});
 
 HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
-    />
-  ),
-  tabBarOptions: {
-    inactiveTintColor: Colors.tabIconDefault,
-    activeTintColor: Colors.tabIconSelected,
-    /*style: {
-      backgroundColor: Colors.tabBg,
-      borderTopWidth: 1,
-      borderTopColor: Colors.tabBorderColor,
-    }*/
-    //showLabel: false,
-  },
+	tabBarLabel: 'home',
+	tabBarIcon: ({ focused }) => (
+		<TabBarIcon
+			focused={focused}
+			name={
+				Platform.OS === 'ios'
+					? `ios-information-circle${focused ? '' : '-outline'}`
+					: 'md-information-circle'
+			}
+		/>
+	),
+	tabBarOptions: {
+		inactiveTintColor: Colors.tabIconDefault,
+		activeTintColor: Colors.tabIconSelected,
+		style: {
+			backgroundColor: Colors.tabBg,
+			borderTopWidth: 1,
+			borderTopColor: Colors.tabBorderColor,
+		}
+		//showLabel: false,
+	},
 };
 
 const LinksStack = createStackNavigator({
-  Links: LinksScreen,
+	Links: LinksScreen,
 }, {
-  defaultNavigationOptions: {
-    headerTintColor: Colors.navHeadColor,
-    headerStyle: {
-      backgroundColor: Colors.navHeadBg,
-      //borderBottomWidth: 0,
-      //shadowColor: 'transparent',
-      //elevation: 0,
-    },
-    //headerTitle: 'Home',
-    headerTitleStyle: {
-      marginRight: 'auto',
-      marginLeft: 'auto'
-    },
-  },
-});
+		defaultNavigationOptions: {
+			headerTintColor: Colors.navHeadColor,
+			headerStyle: {
+				backgroundColor: Colors.navHeadBg,
+				//borderBottomWidth: 0,
+				//shadowColor: 'transparent',
+				//elevation: 0,
+			},
+			//headerTitle: 'Home',
+			headerTitleStyle: {
+				marginRight: 'auto',
+				marginLeft: 'auto'
+			},
+		},
+	});
 
 LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
-    />
-  ),
-  tabBarOptions: {
-    inactiveTintColor: Colors.tabIconDefault,
-    activeTintColor: Colors.tabIconSelected,
-    /*style: {
-      backgroundColor: Colors.tabBg,
-      borderTopWidth: 1,
-      borderTopColor: Colors.tabBorderColor,
-    }*/
-    //showLabel: false,
-  },
+	tabBarLabel: 'Links',
+	tabBarIcon: ({ focused }) => (
+		<TabBarIcon
+			focused={focused}
+			name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
+		/>
+	),
+	tabBarOptions: {
+		inactiveTintColor: Colors.tabIconDefault,
+		activeTintColor: Colors.tabIconSelected,
+		style: {
+			backgroundColor: Colors.tabBg,
+			borderTopWidth: 1,
+			borderTopColor: Colors.tabBorderColor,
+		}
+		//showLabel: false,
+	},
 };
 
 const SettingsStack = createStackNavigator({
-  Settings: SettingsScreen,
+	Settings: SettingsScreen,
 }, {
-  defaultNavigationOptions: {
-    headerTintColor: Colors.navHeadColor,
-    headerStyle: {
-      backgroundColor: Colors.navHeadBg,
-      //borderBottomWidth: 0,
-      //shadowColor: 'transparent',
-      //elevation: 0,
-    },
-    //headerTitle: 'Home',
-    headerTitleStyle: {
-      marginRight: 'auto',
-      marginLeft: 'auto'
-    },
-  },
-});
+		defaultNavigationOptions: {
+			headerTintColor: Colors.navHeadColor,
+			headerStyle: {
+				backgroundColor: Colors.navHeadBg,
+				//borderBottomWidth: 0,
+				//shadowColor: 'transparent',
+				//elevation: 0,
+			},
+			//headerTitle: 'Home',
+			headerTitleStyle: {
+				marginRight: 'auto',
+				marginLeft: 'auto'
+			},
+		},
+	});
 
 SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
-    />
-  ),
-  tabBarOptions: {
-    inactiveTintColor: Colors.tabIconDefault,
-    activeTintColor: Colors.tabIconSelected,
-    /*style: {
-      backgroundColor: Colors.tabBg,
-      borderTopWidth: 1,
-      borderTopColor: Colors.tabBorderColor,
-    }*/
-    //showLabel: false,
-  },
+	tabBarLabel: 'Settings',
+	tabBarIcon: ({ focused }) => (
+		<TabBarIcon
+			focused={focused}
+			name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
+		/>
+	),
+	tabBarOptions: {
+		inactiveTintColor: Colors.tabIconDefault,
+		activeTintColor: Colors.tabIconSelected,
+		style: {
+			backgroundColor: Colors.tabBg,
+			borderTopWidth: 1,
+			borderTopColor: Colors.tabBorderColor,
+		}
+		//showLabel: false,
+	},
 };
 
 export default createBottomTabNavigator({
-  HomeStack,
-  LinksStack,
-  SettingsStack,
+	HomeStack,
+	LinksStack,
+	SettingsStack,
 });

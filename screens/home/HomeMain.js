@@ -8,37 +8,26 @@ import {
 	TouchableOpacity,
 	View,
 	Button,
+	TouchableHighlight,
 } from 'react-native';
 import { WebBrowser } from 'expo';
 
 import { HeaderBackButton } from 'react-navigation';
 
-import Colors from '../constants/Colors';
+import Colors from '../../constants/Colors';
 
-import { pushNotifications } from '../notifications';
+import { pushNotifications } from '../../notifications';
 
-export default class HomeScreen extends React.Component {
-	/*static navigationOptions = {
-	  //header: null,
-	  title: 'Home',
-	};*/
-
+export default class HomeMain extends React.Component {
 	static navigationOptions = ({ navigation }) => {
 		return {
-			headerLeft: (
-				<HeaderBackButton
-					onPress={() => navigation.goBack()}
-					//title="Vissza"
-					tintColor={Colors.navHeadColor}
-					backTitleVisible={true}
-				/>
-			),
+			headerLeft: (<View style={{ paddingLeft: 20 }}><Text style={{ color: Colors.tabIconSelected, fontSize: 32, fontWeight: 'bold' }} >home</Text></View>),
 			headerRight: (<View />),
 			headerTitleStyle: {
 				marginRight: 'auto',
 				marginLeft: 'auto'
 			},
-			headerTitle: 'Home',
+			headerTitle: '',
 			headerTintColor: Colors.navHeadColor,
 			headerStyle: {
 				backgroundColor: Colors.navHeadBg,
@@ -49,25 +38,40 @@ export default class HomeScreen extends React.Component {
 		};
 	}
 
-	render() {
-		return (
-			<View>
-				<Button
+	/**
+	 * <Button
 					onPress={() => { pushNotifications.test() }}
 					title="Notifi"
 					color="#841584"
 					accessibilityLabel=""
 				/>
+
 				<Button
-					onPress={() => { pushNotifications.test2() }}
-					title="Notifi 2"
+					onPress={() => { this.props.navigation.navigate('HomeSub') }}
+					title="Sub screen"
 					color="#841584"
 					accessibilityLabel=""
 				/>
+	 */
+
+	render() {
+		return (
+			<ScrollView style={{ paddingTop: 20 }}>
+				<TouchableHighlight style={{
+					height: 40, marginLeft: 20, marginRight: 20, marginBottom: 20, flexDirection: 'row',
+					justifyContent: 'center',
+					alignItems: 'center',
+					backgroundColor: Colors.tabIconSelected
+				}} onPress={() => { this.props.navigation.navigate('HomeSub') }} underlayColor="white">
+					<Text style={{
+						color: '#fff',
+						fontWeight: 'bold',
+					}}>Go!</Text>
+				</TouchableHighlight>
 				<Text>
 					2019-06-03 10:17
         		</Text>
-			</View>
+			</ScrollView>
 		);
 	}
 }
