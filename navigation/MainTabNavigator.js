@@ -42,11 +42,11 @@ HomeStack.navigationOptions = {
 			focused={focused}
 			name={
 				Platform.OS === 'ios'
-					? `ios-paper-plane${focused ? '' : '-outline'}`
+					? 'ios-paper-plane' //`ios-paper-plane${focused ? '' : '-outline'}`
 					: 'md-paper-plane'
 			}
 		/>
-	),
+	), // ios-paper-plane-outline
 	tabBarOptions: {
 		inactiveTintColor: Colors.tabIconDefault,
 		activeTintColor: Colors.tabIconSelected,
