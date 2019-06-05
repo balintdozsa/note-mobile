@@ -15,13 +15,14 @@ import { WebBrowser } from 'expo';
 import { HeaderBackButton } from 'react-navigation';
 
 import Colors from '../../constants/Colors';
+import SettingsButton from '../../components/SettingsButton';
 
 import { pushNotifications } from '../../notifications';
 
 export default class HomeMain extends React.Component {
 	static navigationOptions = ({ navigation }) => {
 		return {
-			headerLeft: (<View style={{ paddingLeft: 20 }}><Text style={{ color: Colors.tabIconSelected, fontSize: 32, fontWeight: 'bold' }} >notes</Text></View>),
+			headerLeft: (<View style={{ paddingLeft: 20 }}><Text style={{ color: Colors.tabIconSelected, fontSize: 34, fontWeight: 'bold' }} >Notes</Text></View>),
 			headerRight: (<View />),
 			headerTitleStyle: {
 				marginRight: 'auto',
@@ -57,6 +58,12 @@ export default class HomeMain extends React.Component {
 	render() {
 		return (
 			<ScrollView style={{ paddingTop: 20 }}>
+
+			</ScrollView>
+		);
+
+		return (
+			<ScrollView style={{ paddingTop: 0 }}>
 				<TouchableHighlight style={{
 					height: 40, marginLeft: 20, marginRight: 20, marginBottom: 20, flexDirection: 'row',
 					justifyContent: 'center',

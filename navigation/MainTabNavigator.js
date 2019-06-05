@@ -8,20 +8,15 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeMain from '../screens/home/HomeMain';
 import HomeSub from '../screens/home/HomeSub'
 import LinksScreen from '../screens/LinksScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+
+import SettingsScr from '../screens/settings/Settings';
+import LoginScr from '../screens/settings/Login';
 
 const SubStack = createStackNavigator({
 	HomeMain: {
 		screen: HomeMain,
 	},
 	HomeSub: HomeSub,
-	/*NewActivity: {
-		screen: NewActivityScreen,
-	},
-	NewActivityWithSub: NewActivityWithSubScreen,
-	OtherActivity: OtherActivityScreen,
-	OtherActivityWithSub: OtherActivityWithSubScreen,*/
-	//FavActivity: FavActivityScreen,
 }, {
 
 	});
@@ -98,26 +93,26 @@ LinksStack.navigationOptions = {
 	},
 };
 
-const SettingsStack = createStackNavigator({
-	Settings: SettingsScreen,
+////////////////////////////////////////////////////////////////////////////
+///// SETTINGS
+
+const SettingsSubs = createStackNavigator({
+	Settings: {
+		screen: SettingsScr,
+	},
+	Login: LoginScr,
+}, {});
+
+const SettingsMain = createStackNavigator({
+	Settings: SettingsSubs,
 }, {
 		defaultNavigationOptions: {
-			headerTintColor: Colors.navHeadColor,
-			headerStyle: {
-				backgroundColor: Colors.navHeadBg,
-				//borderBottomWidth: 0,
-				//shadowColor: 'transparent',
-				//elevation: 0,
-			},
-			//headerTitle: 'Home',
-			headerTitleStyle: {
-				marginRight: 'auto',
-				marginLeft: 'auto'
-			},
+			header: null,
+			headerMode: 'none',
 		},
 	});
 
-SettingsStack.navigationOptions = {
+SettingsMain.navigationOptions = {
 	tabBarLabel: 'settings',
 	tabBarIcon: ({ focused }) => (
 		<TabBarIcon
@@ -137,8 +132,10 @@ SettingsStack.navigationOptions = {
 	},
 };
 
+////////////////////////////////////////////////////////////////////////////
+
 export default createBottomTabNavigator({
 	HomeStack,
 	//LinksStack,
-	SettingsStack,
+	SettingsMain,
 });

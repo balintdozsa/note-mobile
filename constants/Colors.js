@@ -1,12 +1,13 @@
-const tintColor = '#fa4800';
-
 export default {
-	tabIconDefault: '#eee',
-	tabIconSelected: tintColor,
+	tabIconDefault: '#555',
+	tabIconSelected: '#1f90fc',
+
+	buttonBg: '#1f90fc',
+	buttonBorder: '#1c82e3', // -25 brightness
 
 	navHeadColor: '#555',
 	navHeadBg: '#fff',
 
-	tabBg: '#1a1a1a',
-	tabBorderColor: '#1a1a1a',
+	tabBg: '#fafafa',
+	tabBorderColor: '#e5e5e5',
 };
