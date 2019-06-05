@@ -4,7 +4,15 @@ import { View, Text, ScrollView, TouchableHighlight } from 'react-native';
 import Colors from '../../constants/Colors';
 import SettingsButton from '../../components/SettingsButton';
 
+import { authStore } from '../../redux/AuthStore';
+import { logOut } from '../../redux/AuthActions';
+
 export default class Settings extends React.Component {
+	state = {
+		'isLoggedIn': false,
+		'token': '',
+	}
+
 	static navigationOptions = ({ navigation }) => {
 		return {
 			headerLeft: (<View style={{ paddingLeft: 20 }}><Text style={{ color: Colors.tabIconSelected, fontSize: 34, fontWeight: 'bold' }} >Settings</Text></View>),
@@ -24,11 +32,30 @@ export default class Settings extends React.Component {
 		};
 	}
 
+	componentWillMount = () => {
+		authStore.subscribe(() => {
+			this.setState({ isLoggedIn: authStore.getState().auth.isLoggedIn > 0, token: authStore.getState().auth.token });
+		});
+	}
+
 	render() {
+		authText = (
+			<SettingsButton title="Log in" onPress={() => { this.props.navigation.navigate('Login') }} />
+		);
+
+		if (authStore.getState().auth.isLoggedIn) {
+			authText = (
+				<View>
+					<Text style={{ padding: 15, paddingLeft: 25, fontSize: 20, fontWeight: 'bold' }}>{'User: ' + authStore.getState().auth.userName}</Text>
+					<SettingsButton title="Log Out" onPress={() => { authStore.dispatch(logOut()); }} />
+				</View>
+			);
+		}
+
 		return (
 			<ScrollView style={{ paddingTop: 20 }}>
-				<SettingsButton title="Log in" onPress={() => { this.props.navigation.navigate('Login') }} />
-				<SettingsButton title="Token" onPress={() => { }} />
+				{authText}
+				<SettingsButton title="Token" onPress={() => { alert(authStore.getState().auth.token.substr(authStore.getState().auth.token.length - 16, 16)) }} />
 			</ScrollView>
 		);
 	}

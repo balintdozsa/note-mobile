@@ -5,6 +5,11 @@ import AppNavigator from './navigation/AppNavigator';
 import { pushNotifications } from './notifications';
 pushNotifications.configure();
 
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import { authPersistor, authStore } from './redux/AuthStore';
+import { setUserName, setToken } from './redux/AuthActions';
+
 export default class App extends React.Component {
 	state = {
 		isLoadingComplete: false,
@@ -12,10 +17,14 @@ export default class App extends React.Component {
 
 	render() {
 		return (
-			<View style={styles.container}>
-				{Platform.OS === 'ios' && <StatusBar barStyle="dark-content" />}
-				<AppNavigator />
-			</View>
+			<Provider store={authStore}>
+				<PersistGate loading={null} persistor={authPersistor}>
+					<View style={styles.container}>
+						{Platform.OS === 'ios' && <StatusBar barStyle="dark-content" />}
+						<AppNavigator />
+					</View>
+				</PersistGate>
+			</Provider >
 		);
 	}
 
