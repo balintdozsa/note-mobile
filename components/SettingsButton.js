@@ -12,9 +12,11 @@ export default class SettingsButton extends React.Component {
 				alignItems: 'center',
 				backgroundColor: Colors.buttonBg,
 				borderColor: Colors.buttonBorder,
-				borderTopWidth: 1,
-				borderBottomWidth: 1,
+				borderWidth: 1,
 				marginBottom: 6,
+				marginLeft: 10,
+				marginRight: 10,
+				borderRadius: 10,
 			}} underlayColor={Colors.buttonBorder} onPress={this.props.onPress /*() => { this.props.navigation.navigate('Login') }*/}>
 				<Text style={{
 					width: '100%',
@@ -22,7 +24,7 @@ export default class SettingsButton extends React.Component {
 					fontWeight: 'bold',
 					fontSize: 18,
 					textAlign: 'left',
-					paddingLeft: 25,
+					paddingLeft: 10,
 				}}>{this.props.title}</Text>
 			</TouchableHighlight>
 		);

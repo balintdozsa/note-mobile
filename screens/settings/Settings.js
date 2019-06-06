@@ -15,7 +15,7 @@ export default class Settings extends React.Component {
 
 	static navigationOptions = ({ navigation }) => {
 		return {
-			headerLeft: (<View style={{ paddingLeft: 20 }}><Text style={{ color: Colors.tabIconSelected, fontSize: 34, fontWeight: 'bold' }} >Settings</Text></View>),
+			headerLeft: (<View style={{ paddingLeft: 15 }}><Text style={{ color: Colors.tabIconSelected, fontSize: 34, fontWeight: 'bold' }} >Settings</Text></View>),
 			headerRight: (<View />),
 			headerTitleStyle: {
 				marginRight: 'auto',
@@ -46,7 +46,7 @@ export default class Settings extends React.Component {
 		if (authStore.getState().auth.isLoggedIn) {
 			authText = (
 				<View>
-					<Text style={{ padding: 15, paddingLeft: 25, fontSize: 20, fontWeight: 'bold' }}>{'User: ' + authStore.getState().auth.userName}</Text>
+					<Text style={{ padding: 20, fontSize: 18, fontWeight: 'bold' }}>{'User: ' + authStore.getState().auth.userName}</Text>
 					<SettingsButton title="Log Out" onPress={() => { authStore.dispatch(logOut()); }} />
 				</View>
 			);

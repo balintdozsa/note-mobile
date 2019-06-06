@@ -22,7 +22,7 @@ import { pushNotifications } from '../../notifications';
 export default class HomeMain extends React.Component {
 	static navigationOptions = ({ navigation }) => {
 		return {
-			headerLeft: (<View style={{ paddingLeft: 20 }}><Text style={{ color: Colors.tabIconSelected, fontSize: 34, fontWeight: 'bold' }} >Notes</Text></View>),
+			headerLeft: (<View style={{ paddingLeft: 15 }}><Text style={{ color: Colors.tabIconSelected, fontSize: 34, fontWeight: 'bold' }} >Notes</Text></View>),
 			headerRight: (<View />),
 			headerTitleStyle: {
 				marginRight: 'auto',
