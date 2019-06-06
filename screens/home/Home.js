@@ -48,7 +48,7 @@ export default class Home extends React.Component {
 	}
 
 	listNotes() {
-		var url = 'http://172.16.0.139:8089' + '/' + 'api/notes';
+		var url = 'https://altair-ocean.bdozsa.com' + '/' + 'api/notes';
 
 		fetch(url, {
 			method: "GET",

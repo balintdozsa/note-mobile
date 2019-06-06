@@ -10,7 +10,7 @@ import { authStore } from '../../redux/AuthStore';
 import { logIn, setUserName, setToken } from '../../redux/AuthActions';
 
 export default class Settings extends React.Component {
-	defaultHost = 'http://172.16.0.139:8089';
+	defaultHost = 'https://altair-ocean.bdozsa.com';
 	defaultUsername = 'admin@example.com';
 	defaultPassword = 'password';
 
