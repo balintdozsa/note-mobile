@@ -53,18 +53,22 @@ export default class Home extends React.Component {
 		fetch(url, {
 			method: "GET",
 			headers: {
+				'Accept': 'application/json',
 				'Content-Type': 'application/json',
 				'Authorization': 'Bearer ' + authStore.getState().auth.token,
 			},
 			//body: formBody
 		}).then((response) => response.json()).then((response) => {
-			this.setState({ items: response });
-			//console.log(response);
+			if (response.data) {
+				this.setState({ items: response.data });
+			} else {
+				this.setState({ items: [] });
+			}
 		}).then(() => {
 
 		}).catch((err) => {
-			this.setState({ items: [] });
-			console.log(err);
+			//this.setState({ items: [] });
+			//console.log(err);
 		})
 			.done();
 	}
