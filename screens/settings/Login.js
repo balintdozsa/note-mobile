@@ -11,14 +11,14 @@ import { logIn, setUserName, setToken } from '../../redux/AuthActions';
 
 export default class Settings extends React.Component {
 	defaultHost = 'https://altair-ocean.bdozsa.com';
-	defaultUsername = 'admin@example.com';
-	defaultPassword = 'password';
+	defaultUsername = 'test@example.com';
+	defaultPassword = 'passw';
 
 	state = {
-		'host': this.defaultHost,
-		'username': this.defaultUsername,
-		'password': this.defaultPassword,
-		'token': '',
+		host: this.defaultHost,
+		username: this.defaultUsername,
+		password: this.defaultPassword,
+		token: '',
 	}
 
 	static navigationOptions = ({ navigation }) => {
@@ -61,7 +61,7 @@ export default class Settings extends React.Component {
 			//body: formBody
 		}).then((response) => response.json()).then((response) => {
 			if (response.token) {
-				this.setState({ 'token': response.token });
+				this.setState({ token: response.token });
 
 				authStore.dispatch(setUserName(this.state.username));
 				authStore.dispatch(setToken(response.token));
@@ -91,7 +91,7 @@ export default class Settings extends React.Component {
 					}}
 					placeholder='Host'
 					defaultValue={this.defaultHost}
-					onChangeText={(text) => this.setState('host', text)}
+					onChangeText={(text) => this.setState({ host: text })}
 					autoCorrect={false}
 				/>
 				<TextInput
@@ -104,7 +104,7 @@ export default class Settings extends React.Component {
 					}}
 					placeholder='Username'
 					defaultValue={this.defaultUsername}
-					onChangeText={(text) => this.setState('username', text)}
+					onChangeText={(text) => this.setState({ username: text })}
 					autoCorrect={false}
 				/>
 				<TextInput
@@ -117,7 +117,7 @@ export default class Settings extends React.Component {
 					}}
 					placeholder='Password'
 					defaultValue={this.defaultPassword}
-					onChangeText={(text) => this.setState('password', text)}
+					onChangeText={(text) => this.setState({ password: text })}
 					secureTextEntry={true}
 				/>
 				<SettingsButton title="Log in" onPress={() => this.logIn()} />

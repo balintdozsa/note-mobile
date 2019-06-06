@@ -63,6 +63,7 @@ export default class Home extends React.Component {
 		}).then(() => {
 
 		}).catch((err) => {
+			this.setState({ items: [] });
 			console.log(err);
 		})
 			.done();
@@ -91,13 +92,13 @@ export default class Home extends React.Component {
 			console.log(userData);
 			i++;
 			return (
-				<View style={{ marginBottom: 10, padding: 10, borderRadius: 5, backgroundColor: '#eee' }} key={i}>
+				<View style={{ marginBottom: 6, padding: 10, borderRadius: 5, backgroundColor: '#eee' }} key={i}>
 					<Text style={{ fontSize: 14, color: '#999' }}>{userData.updated_at}</Text>
 					<Text style={{ fontSize: 16 }}>{userData.note}</Text>
 				</View>
 			);
 		});
-		notes = (<View style={{ margin: 20, marginTop: 0 }}>{notes}</View>);
+		notes = (<View style={{ margin: 10, marginTop: 0 }}>{notes}</View>);
 
 		return (
 			<ScrollView style={{ paddingTop: 20 }}
