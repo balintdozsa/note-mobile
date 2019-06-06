@@ -9,6 +9,7 @@ import {
 	View,
 	Button,
 	TouchableHighlight,
+	RefreshControl,
 } from 'react-native';
 import { WebBrowser } from 'expo';
 
@@ -19,7 +20,14 @@ import SettingsButton from '../../components/SettingsButton';
 
 import { pushNotifications } from '../../notifications';
 
-export default class HomeMain extends React.Component {
+import { authStore } from '../../redux/AuthStore';
+
+export default class Home extends React.Component {
+	state = {
+		refreshing: false,
+		items: [],
+	}
+
 	static navigationOptions = ({ navigation }) => {
 		return {
 			headerLeft: (<View style={{ paddingLeft: 15 }}><Text style={{ color: Colors.tabIconSelected, fontSize: 34, fontWeight: 'bold' }} >Notes</Text></View>),
@@ -39,26 +47,67 @@ export default class HomeMain extends React.Component {
 		};
 	}
 
-	/**
-	 * <Button
-					onPress={() => { pushNotifications.test() }}
-					title="Notifi"
-					color="#841584"
-					accessibilityLabel=""
-				/>
+	listNotes() {
+		var url = 'http://172.16.0.139:8089' + '/' + 'api/notes';
 
-				<Button
-					onPress={() => { this.props.navigation.navigate('HomeSub') }}
-					title="Sub screen"
-					color="#841584"
-					accessibilityLabel=""
-				/>
+		fetch(url, {
+			method: "GET",
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': 'Bearer ' + authStore.getState().auth.token,
+			},
+			//body: formBody
+		}).then((response) => response.json()).then((response) => {
+			this.setState({ items: response });
+			//console.log(response);
+		}).then(() => {
+
+		}).catch((err) => {
+			console.log(err);
+		})
+			.done();
+	}
+
+	componentWillMount = () => {
+		this.listNotes();
+	}
+
+	_onRefresh = () => {
+		this.listNotes();
+	}
+
+	/*
+		<Button
+			onPress={() => { pushNotifications.test() }}
+			title="Notifi"
+			color="#841584"
+			accessibilityLabel=""
+		/>
 	 */
 
 	render() {
-		return (
-			<ScrollView style={{ paddingTop: 20 }}>
+		let i = 0;
+		let notes = this.state.items.map((userData) => {
+			console.log(userData);
+			i++;
+			return (
+				<View style={{ marginBottom: 10, padding: 10, borderRadius: 5, backgroundColor: '#eee' }} key={i}>
+					<Text style={{ fontSize: 14, color: '#999' }}>{userData.updated_at}</Text>
+					<Text style={{ fontSize: 16 }}>{userData.note}</Text>
+				</View>
+			);
+		});
+		notes = (<View style={{ margin: 20, marginTop: 0 }}>{notes}</View>);
 
+		return (
+			<ScrollView style={{ paddingTop: 20 }}
+				refreshControl={
+					<RefreshControl
+						refreshing={this.state.refreshing}
+						onRefresh={this._onRefresh}
+					/>
+				}>
+				{notes}
 			</ScrollView>
 		);
 

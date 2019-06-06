@@ -5,7 +5,7 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 import Colors from '../constants/Colors';
 
 import TabBarIcon from '../components/TabBarIcon';
-import HomeMain from '../screens/home/HomeMain';
+import HomeScr from '../screens/home/Home';
 import HomeSub from '../screens/home/HomeSub'
 import LinksScreen from '../screens/LinksScreen';
 
@@ -13,8 +13,8 @@ import SettingsScr from '../screens/settings/Settings';
 import LoginScr from '../screens/settings/Login';
 
 const SubStack = createStackNavigator({
-	HomeMain: {
-		screen: HomeMain,
+	Home: {
+		screen: HomeScr,
 	},
 	HomeSub: HomeSub,
 }, {
