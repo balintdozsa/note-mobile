@@ -10,6 +10,7 @@ import {
 	Button,
 	TouchableHighlight,
 	RefreshControl,
+	TextInput,
 } from 'react-native';
 import { WebBrowser } from 'expo';
 
@@ -26,6 +27,7 @@ export default class Home extends React.Component {
 	state = {
 		refreshing: false,
 		items: [],
+		editNote: '',
 	}
 
 	static navigationOptions = ({ navigation }) => {
@@ -68,13 +70,40 @@ export default class Home extends React.Component {
 
 		}).catch((err) => {
 			//this.setState({ items: [] });
-			//console.log(err);
+			console.log(err);
+		})
+			.done();
+	}
+
+	saveNote() {
+		var note = this.state.editNote;
+
+		var url = 'https://altair-ocean.bdozsa.com' + '/' + 'api/notes/add';
+
+		var formBody = [];
+		formBody.push('note=' + encodeURIComponent(note));
+		formBody = formBody.join("&");
+
+		fetch(url + '?' + formBody, {
+			method: "POST",
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json',
+				'Authorization': 'Bearer ' + authStore.getState().auth.token,
+			},
+			body: formBody
+		}).then((response) => response.json()).then((response) => {
+			console.log(response);
+		}).then(() => {
+
+		}).catch((err) => {
+			console.log(err);
 		})
 			.done();
 	}
 
 	componentWillMount = () => {
-		this.listNotes();
+		//this.listNotes();
 	}
 
 	_onRefresh = () => {
@@ -91,6 +120,42 @@ export default class Home extends React.Component {
 	 */
 
 	render() {
+		let newNote = (
+			<View style={{ flexDirection: 'row' }}>
+				<TextInput
+					ref="host"
+					style={{
+						marginBottom: 6, padding: 9, color: '#222', borderColor: '#f5f5f5', borderBottomWidth: 1, fontSize: 18,
+						backgroundColor: '#fff',
+						flex: 1
+					}}
+					placeholder='My note'
+					defaultValue={this.defaultHost}
+					onChangeText={(text) => this.setState({ host: text })}
+					autoCorrect={false}
+					onChangeText={(text) => this.setState({ editNote: text })}
+				/>
+				<TouchableHighlight style={{
+					height: 50, marginLeft: 0, marginRight: 0, marginBottom: 0, flexDirection: 'row',
+					justifyContent: 'center',
+					alignItems: 'center',
+					marginBottom: 6,
+					marginLeft: 10,
+					marginRight: 10,
+					borderRadius: 10,
+					width: 55,
+				}} underlayColor={Colors.buttonBorder} onPress={() => { this.saveNote() }}>
+					<Text style={{
+						width: '100%',
+						color: '#555',
+						fontWeight: 'bold',
+						fontSize: 28,
+						textAlign: 'center',
+					}}>{'\u2713'}</Text>
+				</TouchableHighlight>
+			</View>
+		);
+
 		let i = 0;
 		let notes = this.state.items.map((userData) => {
 			console.log(userData);
@@ -112,6 +177,7 @@ export default class Home extends React.Component {
 						onRefresh={this._onRefresh}
 					/>
 				}>
+				{newNote}
 				{notes}
 			</ScrollView>
 		);

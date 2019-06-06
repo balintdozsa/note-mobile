@@ -84,9 +84,8 @@ export default class Settings extends React.Component {
 				<TextInput
 					ref="host"
 					style={{
-						marginTop: 5, padding: 9, color: '#222', borderColor: '#fff', borderWidth: 0, fontSize: 18,
+						marginTop: 5, padding: 9, color: '#222', borderColor: '#f5f5f5', borderBottomWidth: 1, fontSize: 18,
 						backgroundColor: '#fff',
-						borderTopLeftRadius: 7, borderTopRightRadius: 7,
 						width: '100%',
 					}}
 					placeholder='Host'
@@ -97,9 +96,8 @@ export default class Settings extends React.Component {
 				<TextInput
 					ref="username"
 					style={{
-						marginTop: 5, padding: 9, color: '#222', borderColor: '#fff', borderWidth: 0, fontSize: 18,
+						marginTop: 5, padding: 9, color: '#222', borderColor: '#f5f5f5', borderBottomWidth: 1, fontSize: 18,
 						backgroundColor: '#fff',
-						borderTopLeftRadius: 7, borderTopRightRadius: 7,
 						width: '100%',
 					}}
 					placeholder='Username'
@@ -110,9 +108,8 @@ export default class Settings extends React.Component {
 				<TextInput
 					ref="password"
 					style={{
-						marginBottom: 5, padding: 9, color: '#222', borderColor: '#f5f5f5', borderTopWidth: 1, fontSize: 18,
+						marginBottom: 5, padding: 9, color: '#222', borderColor: '#f5f5f5', fontSize: 18,
 						backgroundColor: '#fff',
-						borderBottomLeftRadius: 7, borderBottomRightRadius: 7,
 						width: '100%',
 					}}
 					placeholder='Password'
