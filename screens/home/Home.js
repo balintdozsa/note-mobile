@@ -13,6 +13,7 @@ import {
 	TextInput,
 } from 'react-native';
 import { WebBrowser } from 'expo';
+import { Icon } from 'expo';
 
 import { HeaderBackButton } from 'react-navigation';
 
@@ -110,6 +111,34 @@ export default class Home extends React.Component {
 			.done();
 	}
 
+	deleteNote(id) {
+		var url = 'https://altair-ocean.bdozsa.com' + '/' + 'api/notes/delete';
+
+		var formBody = [];
+		formBody.push('id=' + id);
+		formBody = formBody.join("&");
+
+		fetch(url + '?' + formBody, {
+			method: "POST",
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json',
+				'Authorization': 'Bearer ' + authStore.getState().auth.token,
+			},
+			body: formBody
+		}).then((response) => response.json()).then((response) => {
+			console.log(response);
+			if (response.status === "ok") {
+				this.listNotes();
+			}
+		}).then(() => {
+
+		}).catch((err) => {
+			console.log(err);
+		})
+			.done();
+	}
+
 	componentWillMount = () => {
 		this.listNotes();
 	}
@@ -175,9 +204,23 @@ export default class Home extends React.Component {
 			console.log(userData);
 			i++;
 			return (
-				<View style={{ marginBottom: 6, padding: 9, borderRadius: 10, backgroundColor: '#fafafa' }} key={i}>
-					<Text style={{ fontSize: 14, color: '#999' }}>{userData.updated_at}</Text>
-					<Text style={{ fontSize: 17, color: '#000' }}>{userData.note}</Text>
+				<View style={{ marginBottom: 6, padding: 9, borderRadius: 10, backgroundColor: '#fafafa', flexDirection: 'row' }} key={i}>
+					<View style={{ flex: 1 }}>
+						<Text style={{ fontSize: 14, color: '#999' }}>{userData.updated_at}</Text>
+						<Text style={{ fontSize: 17, color: '#000' }}>{userData.note}</Text>
+					</View>
+					<TouchableHighlight style={{
+						height: 40, flexDirection: 'row',
+						justifyContent: 'center',
+						alignItems: 'center',
+						width: 40,
+					}} underlayColor='transparent' onPress={() => { this.deleteNote(userData.id) }}>
+						<Icon.Ionicons
+							name='ios-trash'
+							size={28}
+							color='#F44336'
+						/>
+					</TouchableHighlight>
 				</View>
 			);
 		});
