@@ -36,7 +36,7 @@ export default class Home extends React.Component {
 
 	static navigationOptions = ({ navigation }) => {
 		return {
-			headerLeft: (<View style={{ paddingLeft: 15 }}><Text style={{ color: Colors.navBigHeadColor, fontSize: 34, fontWeight: 'bold' }} >Notes</Text></View>),
+			headerLeft: (<View />),
 			headerRight: (<View />),
 			headerTitleStyle: {
 				marginRight: 'auto',
@@ -184,13 +184,14 @@ export default class Home extends React.Component {
 		notes = (<View style={{ margin: 10, marginTop: 0 }}>{notes}</View>);
 
 		return (
-			<ScrollView style={{ paddingTop: 20, backgroundColor: Colors.bg }}
+			<ScrollView style={{ paddingTop: 0, backgroundColor: Colors.bg }}
 				refreshControl={
 					<RefreshControl
 						refreshing={this.state.refreshing}
 						onRefresh={this._onRefresh}
 					/>
 				}>
+				<View style={{ paddingLeft: 15 }}><Text style={{ color: Colors.navBigHeadColor, fontSize: 34, fontWeight: 'bold', marginBottom: 10 }} >Notes</Text></View>
 				{newNote}
 				{notes}
 			</ScrollView>

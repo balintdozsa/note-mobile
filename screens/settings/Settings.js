@@ -15,7 +15,7 @@ export default class Settings extends React.Component {
 
 	static navigationOptions = ({ navigation }) => {
 		return {
-			headerLeft: (<View style={{ paddingLeft: 15 }}><Text style={{ color: Colors.navBigHeadColor, fontSize: 34, fontWeight: 'bold' }} >Settings</Text></View>),
+			headerLeft: (<View />),
 			headerRight: (<View />),
 			headerTitleStyle: {
 				marginRight: 'auto',
@@ -53,7 +53,8 @@ export default class Settings extends React.Component {
 		}
 
 		return (
-			<ScrollView style={{ paddingTop: 20, backgroundColor: Colors.bg }}>
+			<ScrollView style={{ paddingTop: 0, backgroundColor: Colors.bg }}>
+				<View style={{ paddingLeft: 15 }}><Text style={{ color: Colors.navBigHeadColor, fontSize: 34, fontWeight: 'bold', marginBottom: 10 }} >Settings</Text></View>
 				{authText}
 				<SettingsButton title="Token" onPress={() => { alert(authStore.getState().auth.token.substr(authStore.getState().auth.token.length - 16, 16)) }} />
 			</ScrollView>
