@@ -30,6 +30,10 @@ export default class Home extends React.Component {
 		editNote: '',
 	}
 
+	_values = {
+		editNote: '',
+	}
+
 	static navigationOptions = ({ navigation }) => {
 		return {
 			headerLeft: (<View style={{ paddingLeft: 15 }}><Text style={{ color: Colors.tabIconSelected, fontSize: 34, fontWeight: 'bold' }} >Notes</Text></View>),
@@ -76,7 +80,7 @@ export default class Home extends React.Component {
 	}
 
 	saveNote() {
-		var note = this.state.editNote;
+		var note = this._values.editNote;
 
 		var url = 'https://altair-ocean.bdozsa.com' + '/' + 'api/notes/add';
 
@@ -94,6 +98,10 @@ export default class Home extends React.Component {
 			body: formBody
 		}).then((response) => response.json()).then((response) => {
 			console.log(response);
+			if (response.status === "ok") {
+				this.listNotes();
+				this.textInput.clear();
+			}
 		}).then(() => {
 
 		}).catch((err) => {
@@ -103,7 +111,7 @@ export default class Home extends React.Component {
 	}
 
 	componentWillMount = () => {
-		//this.listNotes();
+		this.listNotes();
 	}
 
 	_onRefresh = () => {
@@ -117,6 +125,7 @@ export default class Home extends React.Component {
 			color="#841584"
 			accessibilityLabel=""
 		/>
+		onChangeText={(text) => this.setState({ editNote: text })}
 	 */
 
 	render() {
@@ -131,9 +140,9 @@ export default class Home extends React.Component {
 					}}
 					placeholder='My note'
 					defaultValue={this.defaultHost}
-					onChangeText={(text) => this.setState({ host: text })}
+					onChangeText={(val) => this._values.editNote = val}
 					autoCorrect={false}
-					onChangeText={(text) => this.setState({ editNote: text })}
+					ref={input => { this.textInput = input }}
 				/>
 				<TouchableHighlight style={{
 					height: 50, marginLeft: 0, marginRight: 0, marginBottom: 0, flexDirection: 'row',
