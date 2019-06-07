@@ -49,7 +49,11 @@ HomeStack.navigationOptions = {
 			backgroundColor: Colors.tabBg,
 			borderTopWidth: 1,
 			borderTopColor: Colors.tabBorderColor,
-		}
+			shadowOffset: { width: 0, height: 2, },
+			shadowColor: '#000',
+			shadowOpacity: 0.15,
+			shadowRadius: 25,
+		},
 		//showLabel: false,
 	},
 };
@@ -129,7 +133,11 @@ SettingsMain.navigationOptions = {
 			backgroundColor: Colors.tabBg,
 			borderTopWidth: 1,
 			borderTopColor: Colors.tabBorderColor,
-		}
+			shadowOffset: { width: 0, height: 2, },
+			shadowColor: '#000',
+			shadowOpacity: 0.15,
+			shadowRadius: 25,
+		},
 		//showLabel: false,
 	},
 };
