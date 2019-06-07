@@ -135,7 +135,7 @@ export default class Home extends React.Component {
 					ref="host"
 					style={{
 						marginLeft: 10,
-						padding: 9, color: '#222', borderColor: '#f5f5f5', borderBottomWidth: 1, fontSize: 18,
+						padding: 9, color: '#222', fontSize: 18,
 						backgroundColor: '#fff',
 						flex: 1,
 						borderTopLeftRadius: 10,
@@ -175,7 +175,7 @@ export default class Home extends React.Component {
 			console.log(userData);
 			i++;
 			return (
-				<View style={{ marginBottom: 6, padding: 9, borderRadius: 10, backgroundColor: '#eee' }} key={i}>
+				<View style={{ marginBottom: 6, padding: 9, borderRadius: 10, backgroundColor: '#fafafa' }} key={i}>
 					<Text style={{ fontSize: 14, color: '#999' }}>{userData.updated_at}</Text>
 					<Text style={{ fontSize: 16 }}>{userData.note}</Text>
 				</View>

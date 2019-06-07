@@ -2,19 +2,19 @@ const dark = '#263238';
 const light = '#455A64';
 
 export default {
-	bg: dark,
+	bg: '#f5f5f5',
 
-	navHeadBg: dark,
-	navHeadBorder: dark,
-	navHeadColor: '#eee',
-	navBigHeadColor: '#eee',
+	navHeadBg: '#f5f5f5',
+	navHeadBorder: '#f5f5f5',
+	navHeadColor: dark,
+	navBigHeadColor: dark,
 
-	tabIconDefault: '#90A4AE',
+	tabIconDefault: '#999',
 	tabIconSelected: dark,
 
 	buttonBg: dark,
-	buttonBorder: light, // -25 brightness
+	buttonBorder: dark, // -25 brightness
 
-	tabBg: '#fafafa',
-	tabBorderColor: '#fafafa',
+	tabBg: '#f5f5f5',
+	tabBorderColor: '#f5f5f5',
 };

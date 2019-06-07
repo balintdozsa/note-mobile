@@ -21,7 +21,7 @@ export default class App extends React.Component {
 			<Provider store={authStore}>
 				<PersistGate loading={null} persistor={authPersistor}>
 					<View style={styles.container}>
-						{Platform.OS === 'ios' && <StatusBar barStyle="light-content" />}
+						{Platform.OS === 'ios' && <StatusBar barStyle="dark-content" />}
 						<AppNavigator />
 					</View>
 				</PersistGate>

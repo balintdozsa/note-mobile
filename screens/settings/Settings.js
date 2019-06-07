@@ -46,7 +46,7 @@ export default class Settings extends React.Component {
 		if (authStore.getState().auth.isLoggedIn) {
 			authText = (
 				<View>
-					<Text style={{ padding: 20, fontSize: 18, fontWeight: 'bold', color: '#fff' }}>{'User: ' + authStore.getState().auth.userName}</Text>
+					<Text style={{ padding: 20, fontSize: 18, fontWeight: 'bold', color: '#000' }}>{'User: ' + authStore.getState().auth.userName}</Text>
 					<SettingsButton title="Log Out" onPress={() => { authStore.dispatch(logOut()); }} />
 				</View>
 			);
