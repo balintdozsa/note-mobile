@@ -175,7 +175,7 @@ export default class Home extends React.Component {
 			console.log(userData);
 			i++;
 			return (
-				<View style={{ marginBottom: 6, padding: 10, borderRadius: 10, backgroundColor: '#eee' }} key={i}>
+				<View style={{ marginBottom: 6, padding: 9, borderRadius: 10, backgroundColor: '#eee' }} key={i}>
 					<Text style={{ fontSize: 14, color: '#999' }}>{userData.updated_at}</Text>
 					<Text style={{ fontSize: 16 }}>{userData.note}</Text>
 				</View>

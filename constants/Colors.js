@@ -1,16 +1,19 @@
-export default {
-	bg: '#263238',
+const dark = '#263238';
+const light = '#455A64';
 
-	navHeadBg: '#263238',
+export default {
+	bg: dark,
+
+	navHeadBg: dark,
+	navHeadBorder: dark,
 	navHeadColor: '#eee',
-	navHeadBorder: '#263238',
 	navBigHeadColor: '#eee',
 
-	tabIconDefault: '#999',
-	tabIconSelected: '#263238',
+	tabIconDefault: '#90A4AE',
+	tabIconSelected: dark,
 
-	buttonBg: '#263238',
-	buttonBorder: '#455A64', // -25 brightness
+	buttonBg: dark,
+	buttonBorder: light, // -25 brightness
 
 	tabBg: '#fafafa',
 	tabBorderColor: '#fafafa',
