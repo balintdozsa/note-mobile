@@ -1,13 +1,17 @@
 export default {
-	tabIconDefault: '#555',
-	tabIconSelected: '#1f90fc',
+	bg: '#263238',
 
-	buttonBg: '#1f90fc',
-	buttonBorder: '#1c82e3', // -25 brightness
+	navHeadBg: '#263238',
+	navHeadColor: '#eee',
+	navHeadBorder: '#263238',
+	navBigHeadColor: '#eee',
 
-	navHeadColor: '#555',
-	navHeadBg: '#fff',
+	tabIconDefault: '#999',
+	tabIconSelected: '#263238',
+
+	buttonBg: '#263238',
+	buttonBorder: '#455A64', // -25 brightness
 
 	tabBg: '#fafafa',
-	tabBorderColor: '#e5e5e5',
+	tabBorderColor: '#fafafa',
 };

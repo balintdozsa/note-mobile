@@ -40,6 +40,7 @@ export default class Settings extends React.Component {
 			headerTintColor: Colors.navHeadColor,
 			headerStyle: {
 				backgroundColor: Colors.navHeadBg,
+				borderBottomColor: Colors.navHeadBorder,
 			},
 		};
 	}
@@ -80,13 +81,14 @@ export default class Settings extends React.Component {
 
 	render() {
 		return (
-			<ScrollView style={{ paddingTop: 0 }}>
+			<ScrollView style={{ paddingTop: 20, backgroundColor: Colors.bg }}>
 				<TextInput
 					ref="host"
 					style={{
-						marginTop: 5, padding: 9, color: '#222', borderColor: '#f5f5f5', borderBottomWidth: 1, fontSize: 18,
+						padding: 9, color: '#222', borderColor: '#f5f5f5', borderBottomWidth: 1, fontSize: 18,
 						backgroundColor: '#fff',
-						width: '100%',
+						marginLeft: 10, marginRight: 10,
+						borderTopLeftRadius: 10, borderTopRightRadius: 10,
 					}}
 					placeholder='Host'
 					defaultValue={this.defaultHost}
@@ -96,9 +98,9 @@ export default class Settings extends React.Component {
 				<TextInput
 					ref="username"
 					style={{
-						marginTop: 5, padding: 9, color: '#222', borderColor: '#f5f5f5', borderBottomWidth: 1, fontSize: 18,
+						padding: 9, color: '#222', borderColor: '#f5f5f5', borderBottomWidth: 1, fontSize: 18,
 						backgroundColor: '#fff',
-						width: '100%',
+						marginLeft: 10, marginRight: 10,
 					}}
 					placeholder='Username'
 					defaultValue={this.defaultUsername}
@@ -108,9 +110,10 @@ export default class Settings extends React.Component {
 				<TextInput
 					ref="password"
 					style={{
-						marginBottom: 5, padding: 9, color: '#222', borderColor: '#f5f5f5', fontSize: 18,
+						marginBottom: 10, padding: 9, color: '#222', borderColor: '#f5f5f5', fontSize: 18,
 						backgroundColor: '#fff',
-						width: '100%',
+						marginLeft: 10, marginRight: 10,
+						borderBottomLeftRadius: 10, borderBottomRightRadius: 10,
 					}}
 					placeholder='Password'
 					defaultValue={this.defaultPassword}

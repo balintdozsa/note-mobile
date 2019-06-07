@@ -15,7 +15,7 @@ export default class Settings extends React.Component {
 
 	static navigationOptions = ({ navigation }) => {
 		return {
-			headerLeft: (<View style={{ paddingLeft: 15 }}><Text style={{ color: Colors.tabIconSelected, fontSize: 34, fontWeight: 'bold' }} >Settings</Text></View>),
+			headerLeft: (<View style={{ paddingLeft: 15 }}><Text style={{ color: Colors.navBigHeadColor, fontSize: 34, fontWeight: 'bold' }} >Settings</Text></View>),
 			headerRight: (<View />),
 			headerTitleStyle: {
 				marginRight: 'auto',
@@ -46,14 +46,14 @@ export default class Settings extends React.Component {
 		if (authStore.getState().auth.isLoggedIn) {
 			authText = (
 				<View>
-					<Text style={{ padding: 20, fontSize: 18, fontWeight: 'bold' }}>{'User: ' + authStore.getState().auth.userName}</Text>
+					<Text style={{ padding: 20, fontSize: 18, fontWeight: 'bold', color: '#fff' }}>{'User: ' + authStore.getState().auth.userName}</Text>
 					<SettingsButton title="Log Out" onPress={() => { authStore.dispatch(logOut()); }} />
 				</View>
 			);
 		}
 
 		return (
-			<ScrollView style={{ paddingTop: 20 }}>
+			<ScrollView style={{ paddingTop: 20, backgroundColor: Colors.bg }}>
 				{authText}
 				<SettingsButton title="Token" onPress={() => { alert(authStore.getState().auth.token.substr(authStore.getState().auth.token.length - 16, 16)) }} />
 			</ScrollView>

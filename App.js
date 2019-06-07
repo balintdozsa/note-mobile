@@ -9,6 +9,7 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { authPersistor, authStore } from './redux/AuthStore';
 import { setUserName, setToken } from './redux/AuthActions';
+import Colors from './constants/Colors';
 
 export default class App extends React.Component {
 	state = {
@@ -20,7 +21,7 @@ export default class App extends React.Component {
 			<Provider store={authStore}>
 				<PersistGate loading={null} persistor={authPersistor}>
 					<View style={styles.container}>
-						{Platform.OS === 'ios' && <StatusBar barStyle="dark-content" />}
+						{Platform.OS === 'ios' && <StatusBar barStyle="light-content" />}
 						<AppNavigator />
 					</View>
 				</PersistGate>
@@ -36,7 +37,7 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: '#fff',
+		backgroundColor: Colors.bg,
 	},
 });
 

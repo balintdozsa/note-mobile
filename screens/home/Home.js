@@ -36,7 +36,7 @@ export default class Home extends React.Component {
 
 	static navigationOptions = ({ navigation }) => {
 		return {
-			headerLeft: (<View style={{ paddingLeft: 15 }}><Text style={{ color: Colors.tabIconSelected, fontSize: 34, fontWeight: 'bold' }} >Notes</Text></View>),
+			headerLeft: (<View style={{ paddingLeft: 15 }}><Text style={{ color: Colors.navBigHeadColor, fontSize: 34, fontWeight: 'bold' }} >Notes</Text></View>),
 			headerRight: (<View />),
 			headerTitleStyle: {
 				marginRight: 'auto',
@@ -130,13 +130,16 @@ export default class Home extends React.Component {
 
 	render() {
 		let newNote = (
-			<View style={{ flexDirection: 'row' }}>
+			<View style={{ flexDirection: 'row', marginBottom: 10 }}>
 				<TextInput
 					ref="host"
 					style={{
-						marginBottom: 6, padding: 9, color: '#222', borderColor: '#f5f5f5', borderBottomWidth: 1, fontSize: 18,
+						marginLeft: 10,
+						padding: 9, color: '#222', borderColor: '#f5f5f5', borderBottomWidth: 1, fontSize: 18,
 						backgroundColor: '#fff',
-						flex: 1
+						flex: 1,
+						borderTopLeftRadius: 10,
+						borderBottomLeftRadius: 10,
 					}}
 					placeholder='My note'
 					defaultValue={this.defaultHost}
@@ -148,15 +151,17 @@ export default class Home extends React.Component {
 					height: 50, marginLeft: 0, marginRight: 0, marginBottom: 0, flexDirection: 'row',
 					justifyContent: 'center',
 					alignItems: 'center',
-					marginBottom: 6,
-					marginLeft: 10,
 					marginRight: 10,
-					borderRadius: 10,
+					borderTopRightRadius: 10,
+					borderBottomRightRadius: 10,
+					backgroundColor: Colors.buttonBg,
+					borderColor: Colors.buttonBorder,
+					borderWidth: 1,
 					width: 55,
 				}} underlayColor={Colors.buttonBorder} onPress={() => { this.saveNote() }}>
 					<Text style={{
 						width: '100%',
-						color: '#555',
+						color: '#fff',
 						fontWeight: 'bold',
 						fontSize: 28,
 						textAlign: 'center',
@@ -170,7 +175,7 @@ export default class Home extends React.Component {
 			console.log(userData);
 			i++;
 			return (
-				<View style={{ marginBottom: 6, padding: 10, borderRadius: 5, backgroundColor: '#eee' }} key={i}>
+				<View style={{ marginBottom: 6, padding: 10, borderRadius: 10, backgroundColor: '#eee' }} key={i}>
 					<Text style={{ fontSize: 14, color: '#999' }}>{userData.updated_at}</Text>
 					<Text style={{ fontSize: 16 }}>{userData.note}</Text>
 				</View>
@@ -179,7 +184,7 @@ export default class Home extends React.Component {
 		notes = (<View style={{ margin: 10, marginTop: 0 }}>{notes}</View>);
 
 		return (
-			<ScrollView style={{ paddingTop: 20 }}
+			<ScrollView style={{ paddingTop: 20, backgroundColor: Colors.bg }}
 				refreshControl={
 					<RefreshControl
 						refreshing={this.state.refreshing}
