@@ -169,6 +169,7 @@ export default class Home extends React.Component {
 						flex: 1,
 						borderTopLeftRadius: 10,
 						borderBottomLeftRadius: 10,
+						minHeight: 45,
 					}}
 					placeholder='My note'
 					defaultValue={this.defaultHost}
@@ -178,7 +179,7 @@ export default class Home extends React.Component {
 					multiline={true}
 				/>
 				<TouchableHighlight style={{
-					height: 50, marginLeft: 0, marginRight: 0, marginBottom: 0, flexDirection: 'row',
+					marginLeft: 0, marginRight: 0, marginBottom: 0, flexDirection: 'row',
 					justifyContent: 'center',
 					alignItems: 'center',
 					marginRight: 10,
