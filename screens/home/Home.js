@@ -22,17 +22,19 @@ import SettingsButton from '../../components/SettingsButton';
 
 import { pushNotifications } from '../../notifications';
 
-import { authStore } from '../../redux/Stores';
+import { authStore, tempStore } from '../../redux/Stores';
+import { editNote } from '../../redux/TempActions';
 
 export default class Home extends React.Component {
 	state = {
 		refreshing: false,
 		items: [],
-		editNote: null,
+		//editNote: null,
 	}
 
 	values = {
-		editNote: '',
+		noteId: null,
+		noteContent: '',
 	}
 
 	static navigationOptions = ({ navigation }) => {
@@ -81,11 +83,23 @@ export default class Home extends React.Component {
 	}
 
 	saveNote() {
-		var note = this.values.editNote;
+		let id = this.values.noteId;
 
-		var url = authStore.getState().auth.host + '/' + 'api/notes/add';
+		this.values.noteId = null;
+		tempStore.dispatch(editNote(null));
+
+		var note = this.values.noteContent;
+
+		var url = authStore.getState().auth.host + '/' + 'api/notes';
+
+		if (id !== null) {
+			url += '/modify';
+		} else {
+			url += '/add';
+		}
 
 		var formBody = [];
+		formBody.push('id=' + id);
 		formBody.push('note=' + encodeURIComponent(note));
 		formBody = formBody.join("&");
 
@@ -112,8 +126,10 @@ export default class Home extends React.Component {
 	}
 
 	editNote(id, note) {
-		//this.values.editNote;
-		//this.setState({ editNote: note });
+		this.values.noteId = id;
+		tempStore.dispatch(editNote(note));
+		console.log(tempStore.getState().temp.note);
+		this.setState({ refreshing: false });
 	}
 
 	deleteNote(id) {
@@ -163,7 +179,10 @@ export default class Home extends React.Component {
 	 */
 
 	render() {
-		//let editNote = this.values.editNote;
+		let noteContent = null;
+		if (tempStore.getState().temp.note) {
+			noteContent = tempStore.getState().temp.note;
+		}
 
 		let newNote = (
 			<View style={{ flexDirection: 'row', marginBottom: 10 }}>
@@ -180,11 +199,11 @@ export default class Home extends React.Component {
 					}}
 					placeholder='My note'
 					defaultValue={this.defaultHost}
-					onChangeText={(val) => this.values.editNote = val}
+					onChangeText={(val) => this.values.noteContent = val}
 					autoCorrect={false}
 					ref={input => { this.textInput = input }}
 					multiline={true}
-				/>
+				>{noteContent}</TextInput>
 				<TouchableHighlight style={{
 					marginLeft: 0, marginRight: 0, marginBottom: 0, flexDirection: 'row',
 					justifyContent: 'center',
