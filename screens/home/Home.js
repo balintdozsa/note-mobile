@@ -22,16 +22,16 @@ import SettingsButton from '../../components/SettingsButton';
 
 import { pushNotifications } from '../../notifications';
 
-import { authStore } from '../../redux/AuthStore';
+import { authStore } from '../../redux/Stores';
 
 export default class Home extends React.Component {
 	state = {
 		refreshing: false,
 		items: [],
-		editNote: '',
+		editNote: null,
 	}
 
-	_values = {
+	values = {
 		editNote: '',
 	}
 
@@ -81,7 +81,7 @@ export default class Home extends React.Component {
 	}
 
 	saveNote() {
-		var note = this._values.editNote;
+		var note = this.values.editNote;
 
 		var url = authStore.getState().auth.host + '/' + 'api/notes/add';
 
@@ -109,6 +109,11 @@ export default class Home extends React.Component {
 			console.log(err);
 		})
 			.done();
+	}
+
+	editNote(id, note) {
+		//this.values.editNote;
+		//this.setState({ editNote: note });
 	}
 
 	deleteNote(id) {
@@ -158,6 +163,8 @@ export default class Home extends React.Component {
 	 */
 
 	render() {
+		//let editNote = this.values.editNote;
+
 		let newNote = (
 			<View style={{ flexDirection: 'row', marginBottom: 10 }}>
 				<TextInput
@@ -173,7 +180,7 @@ export default class Home extends React.Component {
 					}}
 					placeholder='My note'
 					defaultValue={this.defaultHost}
-					onChangeText={(val) => this._values.editNote = val}
+					onChangeText={(val) => this.values.editNote = val}
 					autoCorrect={false}
 					ref={input => { this.textInput = input }}
 					multiline={true}
@@ -201,28 +208,43 @@ export default class Home extends React.Component {
 			</View>
 		);
 
+		console.log(new Date());
 		let i = 0;
-		let notes = this.state.items.map((userData) => {
-			console.log(userData);
+		let notes = this.state.items.map((currNote) => {
+			console.log(currNote);
 			i++;
 			return (
 				<View style={{ marginBottom: 6, padding: 9, borderRadius: 10, backgroundColor: '#fafafa', flexDirection: 'row' }} key={i}>
 					<View style={{ flex: 1 }}>
-						<Text style={{ fontSize: 14, color: '#999' }}>{userData.updated_at}</Text>
-						<Text style={{ fontSize: 17, color: '#000' }}>{userData.note}</Text>
+						<Text style={{ fontSize: 14, color: '#999' }}>{currNote.updated_at}</Text>
+						<Text style={{ fontSize: 17, color: '#000' }}>{currNote.note}</Text>
 					</View>
-					<TouchableHighlight style={{
-						height: 40, flexDirection: 'row',
-						justifyContent: 'center',
-						alignItems: 'center',
-						width: 40,
-					}} underlayColor='transparent' onPress={() => { this.deleteNote(userData.id) }}>
-						<Icon.Ionicons
-							name='ios-trash'
-							size={28}
-							color='#F44336'
-						/>
-					</TouchableHighlight>
+					<View>
+						<TouchableHighlight style={{
+							height: 32, flexDirection: 'row',
+							justifyContent: 'center',
+							alignItems: 'center',
+							width: 32,
+						}} underlayColor='transparent' onPress={() => { this.editNote(currNote.id, currNote.note) }}>
+							<Icon.Ionicons
+								name='ios-create'
+								size={24}
+								color='#4CAF50'
+							/>
+						</TouchableHighlight>
+						<TouchableHighlight style={{
+							height: 32, flexDirection: 'row',
+							justifyContent: 'center',
+							alignItems: 'center',
+							width: 32,
+						}} underlayColor='transparent' onPress={() => { this.deleteNote(currNote.id) }}>
+							<Icon.Ionicons
+								name='ios-trash'
+								size={28}
+								color='#F44336'
+							/>
+						</TouchableHighlight>
+					</View>
 				</View>
 			);
 		});
@@ -242,25 +264,6 @@ export default class Home extends React.Component {
 					{notes}
 				</ScrollView>
 			</View>
-		);
-
-		return (
-			<ScrollView style={{ paddingTop: 0 }}>
-				<TouchableHighlight style={{
-					height: 40, marginLeft: 20, marginRight: 20, marginBottom: 20, flexDirection: 'row',
-					justifyContent: 'center',
-					alignItems: 'center',
-					backgroundColor: Colors.tabIconSelected
-				}} onPress={() => { this.props.navigation.navigate('HomeSub') }} underlayColor="white">
-					<Text style={{
-						color: '#fff',
-						fontWeight: 'bold',
-					}}>Go!</Text>
-				</TouchableHighlight>
-				<Text>
-					2019-06-03 10:17
-        		</Text>
-			</ScrollView>
 		);
 	}
 }

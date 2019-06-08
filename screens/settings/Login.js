@@ -6,7 +6,7 @@ import SettingsButton from '../../components/SettingsButton';
 
 import { HeaderBackButton } from 'react-navigation';
 
-import { authStore } from '../../redux/AuthStore';
+import { authStore } from '../../redux/Stores';
 import { logIn, setUserName, setToken } from '../../redux/AuthActions';
 
 export default class Settings extends React.Component {

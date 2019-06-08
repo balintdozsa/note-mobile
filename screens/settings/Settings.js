@@ -4,7 +4,7 @@ import { View, Text, ScrollView, TouchableHighlight } from 'react-native';
 import Colors from '../../constants/Colors';
 import SettingsButton from '../../components/SettingsButton';
 
-import { authStore } from '../../redux/AuthStore';
+import { authStore } from '../../redux/Stores';
 import { logOut } from '../../redux/AuthActions';
 
 export default class Settings extends React.Component {

@@ -7,7 +7,7 @@ pushNotifications.configure();
 
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import { authPersistor, authStore } from './redux/AuthStore';
+import { authPersistor, authStore } from './redux/Stores';
 import { setHost, setUserName, setToken } from './redux/AuthActions';
 import Colors from './constants/Colors';
 
