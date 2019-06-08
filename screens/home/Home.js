@@ -55,7 +55,7 @@ export default class Home extends React.Component {
 	}
 
 	listNotes() {
-		var url = 'https://altair-ocean.bdozsa.com' + '/' + 'api/notes';
+		var url = authStore.getState().auth.host + '/' + 'api/notes';
 
 		fetch(url, {
 			method: "GET",
@@ -83,7 +83,7 @@ export default class Home extends React.Component {
 	saveNote() {
 		var note = this._values.editNote;
 
-		var url = 'https://altair-ocean.bdozsa.com' + '/' + 'api/notes/add';
+		var url = authStore.getState().auth.host + '/' + 'api/notes/add';
 
 		var formBody = [];
 		formBody.push('note=' + encodeURIComponent(note));
@@ -112,7 +112,7 @@ export default class Home extends React.Component {
 	}
 
 	deleteNote(id) {
-		var url = 'https://altair-ocean.bdozsa.com' + '/' + 'api/notes/delete';
+		var url = authStore.getState().auth.host + '/' + 'api/notes/delete';
 
 		var formBody = [];
 		formBody.push('id=' + id);
@@ -229,17 +229,19 @@ export default class Home extends React.Component {
 		notes = (<View style={{ margin: 10, marginTop: 0 }}>{notes}</View>);
 
 		return (
-			<ScrollView style={{ paddingTop: 0, backgroundColor: Colors.bg }}
-				refreshControl={
-					<RefreshControl
-						refreshing={this.state.refreshing}
-						onRefresh={this._onRefresh}
-					/>
-				}>
+			<View style={{ paddingTop: 0, backgroundColor: Colors.bg, flex: 1 }}>
 				<View style={{ paddingLeft: 15 }}><Text style={{ color: Colors.navBigHeadColor, fontSize: 34, fontWeight: 'bold', marginBottom: 10 }} >Notes</Text></View>
 				{newNote}
-				{notes}
-			</ScrollView>
+				<ScrollView style={{}}
+					refreshControl={
+						<RefreshControl
+							refreshing={this.state.refreshing}
+							onRefresh={this._onRefresh}
+						/>
+					}>
+					{notes}
+				</ScrollView>
+			</View>
 		);
 
 		return (

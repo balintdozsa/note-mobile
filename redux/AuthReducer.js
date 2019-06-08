@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 
 const INITIAL_STATE = {
+	host: '',
 	isLoggedIn: 0,
 	userName: '',
 	token: '',
@@ -10,12 +11,16 @@ const authReducer = (state = INITIAL_STATE, action) => {
 	ret = state;
 
 	let {
+		host,
 		isLoggedIn,
 		userName,
 		token,
 	} = state;
 
 	switch (action.type) {
+		case 'SET_HOST':
+			host = action.payload;
+			break;
 		case 'LOG_IN':
 			isLoggedIn = 1;
 			break;
@@ -34,6 +39,7 @@ const authReducer = (state = INITIAL_STATE, action) => {
 	}
 
 	const newState = {
+		host,
 		isLoggedIn,
 		userName,
 		token,

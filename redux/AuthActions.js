@@ -1,3 +1,10 @@
+export const setHost = host => (
+	{
+		type: 'SET_HOST',
+		payload: host,
+	}
+);
+
 export const logIn = () => {
 	return {
 		type: 'LOG_IN',

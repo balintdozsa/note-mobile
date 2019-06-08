@@ -53,11 +53,13 @@ export default class Settings extends React.Component {
 		}
 
 		return (
-			<ScrollView style={{ paddingTop: 0, backgroundColor: Colors.bg }}>
+			<View style={{ paddingTop: 0, backgroundColor: Colors.bg, flex: 1 }}>
 				<View style={{ paddingLeft: 15 }}><Text style={{ color: Colors.navBigHeadColor, fontSize: 34, fontWeight: 'bold', marginBottom: 10 }} >Settings</Text></View>
-				{authText}
-				<SettingsButton title="Token" onPress={() => { alert(authStore.getState().auth.token.substr(authStore.getState().auth.token.length - 16, 16)) }} />
-			</ScrollView>
+				<ScrollView style={{ paddingTop: 0, backgroundColor: Colors.bg }}>
+					{authText}
+					<SettingsButton title="Token" onPress={() => { alert(authStore.getState().auth.token.substr(authStore.getState().auth.token.length - 16, 16)) }} />
+				</ScrollView>
+			</View>
 		);
 	}
 }

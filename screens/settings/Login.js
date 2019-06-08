@@ -10,12 +10,10 @@ import { authStore } from '../../redux/AuthStore';
 import { logIn, setUserName, setToken } from '../../redux/AuthActions';
 
 export default class Settings extends React.Component {
-	defaultHost = 'https://altair-ocean.bdozsa.com';
-	defaultUsername = 'test@example.com';
-	defaultPassword = 'passw';
+	defaultUsername = '';
+	defaultPassword = '';
 
 	state = {
-		host: this.defaultHost,
 		username: this.defaultUsername,
 		password: this.defaultPassword,
 		token: '',
@@ -46,7 +44,7 @@ export default class Settings extends React.Component {
 	}
 
 	logIn() {
-		var url = this.state.host + '/' + 'api/login';
+		var url = authStore.getState().auth.host + '/' + 'api/login';
 
 		var formBody = [];
 		formBody.push('email=' + encodeURIComponent(this.state.username));
@@ -83,24 +81,12 @@ export default class Settings extends React.Component {
 		return (
 			<ScrollView style={{ paddingTop: 20, backgroundColor: Colors.bg }}>
 				<TextInput
-					ref="host"
-					style={{
-						padding: 9, color: '#222', fontSize: 18,
-						backgroundColor: '#fff',
-						marginLeft: 10, marginRight: 10,
-						borderTopLeftRadius: 10, borderTopRightRadius: 10,
-					}}
-					placeholder='Host'
-					defaultValue={this.defaultHost}
-					onChangeText={(text) => this.setState({ host: text })}
-					autoCorrect={false}
-				/>
-				<TextInput
 					ref="username"
 					style={{
 						padding: 9, color: '#222', fontSize: 18,
 						backgroundColor: '#fff',
 						marginLeft: 10, marginRight: 10,
+						borderTopLeftRadius: 10, borderTopRightRadius: 10,
 					}}
 					placeholder='Username'
 					defaultValue={this.defaultUsername}

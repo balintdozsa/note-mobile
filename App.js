@@ -8,7 +8,7 @@ pushNotifications.configure();
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { authPersistor, authStore } from './redux/AuthStore';
-import { setUserName, setToken } from './redux/AuthActions';
+import { setHost, setUserName, setToken } from './redux/AuthActions';
 import Colors from './constants/Colors';
 
 export default class App extends React.Component {
@@ -17,6 +17,10 @@ export default class App extends React.Component {
 	};
 
 	render() {
+		if (typeof authStore.getState().auth.host === 'undefined' || authStore.getState().auth.host === '') {
+			authStore.dispatch(setHost('https://altair-ocean.bdozsa.com'));
+		}
+
 		return (
 			<Provider store={authStore}>
 				<PersistGate loading={null} persistor={authPersistor}>
