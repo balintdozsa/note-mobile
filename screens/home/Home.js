@@ -175,6 +175,7 @@ export default class Home extends React.Component {
 					onChangeText={(val) => this._values.editNote = val}
 					autoCorrect={false}
 					ref={input => { this.textInput = input }}
+					multiline={true}
 				/>
 				<TouchableHighlight style={{
 					height: 50, marginLeft: 0, marginRight: 0, marginBottom: 0, flexDirection: 'row',
