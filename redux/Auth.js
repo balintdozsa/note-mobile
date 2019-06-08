@@ -7,7 +7,7 @@ const INITIAL_STATE = {
 	token: '',
 };
 
-const authReducer = (state = INITIAL_STATE, action) => {
+const auth = (state = INITIAL_STATE, action) => {
 	ret = state;
 
 	let {
@@ -49,5 +49,5 @@ const authReducer = (state = INITIAL_STATE, action) => {
 };
 
 export default combineReducers({
-	auth: authReducer,
+	auth: auth,
 });

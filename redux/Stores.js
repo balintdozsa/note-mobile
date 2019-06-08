@@ -2,14 +2,14 @@ import { createStore } from 'redux';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-import authReducer from './AuthReducer';
+import auth from './Auth';
 
 const persistConfig = {
 	key: 'root',
 	storage,
 }
 
-const persistedReducer = persistReducer(persistConfig, authReducer);
+const persistedReducer = persistReducer(persistConfig, auth);
 
 /*const store = createStore(authReducer);
 export default store;*/
