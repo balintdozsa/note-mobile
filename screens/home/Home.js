@@ -57,7 +57,7 @@ export default class Home extends React.Component {
 	}
 
 	listNotes() {
-		var url = authStore.getState().auth.host + '/' + 'api/notes';
+		var url = authStore.getState().auth.host + '/' + 'api/note';
 
 		fetch(url, {
 			method: "GET",
@@ -90,7 +90,7 @@ export default class Home extends React.Component {
 
 		var note = this.values.noteContent;
 
-		var url = authStore.getState().auth.host + '/' + 'api/notes';
+		var url = authStore.getState().auth.host + '/' + 'api/note';
 
 		if (id !== null) {
 			url += '/modify';
@@ -133,7 +133,7 @@ export default class Home extends React.Component {
 	}
 
 	deleteNote(id) {
-		var url = authStore.getState().auth.host + '/' + 'api/notes/delete';
+		var url = authStore.getState().auth.host + '/' + 'api/note/delete';
 
 		var formBody = [];
 		formBody.push('id=' + id);
