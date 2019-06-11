@@ -17,9 +17,9 @@ export default class App extends React.Component {
 	};
 
 	render() {
-		if (typeof authStore.getState().auth.host === 'undefined' || authStore.getState().auth.host === '') {
-			authStore.dispatch(setHost('https://altair-ocean.bdozsa.com'));
-		}
+		//if (typeof authStore.getState().auth.host === 'undefined' || authStore.getState().auth.host === '') {
+		authStore.dispatch(setHost('https://api.altair-cloud.bdozsa.com'));
+		//}
 
 		return (
 			<Provider store={authStore}>
