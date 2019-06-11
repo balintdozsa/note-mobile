@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, TextInput, ScrollView, TouchableHighlight } from 'react-native';
+import { Notifications } from 'expo';
 
 import Colors from '../../constants/Colors';
 import SettingsButton from '../../components/SettingsButton';
@@ -43,6 +44,34 @@ export default class Settings extends React.Component {
 		};
 	}
 
+	async afterLogIn(user_token) {
+		var url = authStore.getState().auth.host + '/' + 'api/user/setPushToken';
+
+		let push_token = await Notifications.getExpoPushTokenAsync();
+		push_token = push_token.replace('ExponentPushToken', '').replace('[', '').replace(']', '');
+
+		var formBody = [];
+		formBody.push('token=' + push_token);
+		formBody = formBody.join("&");
+
+		fetch(url + '?' + formBody, {
+			method: "POST",
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json',
+				'Authorization': 'Bearer ' + user_token,
+			},
+			body: formBody
+		}).then((response) => {
+			console.log(response);
+		}).then(() => {
+
+		}).catch((err) => {
+			console.log(err);
+		})
+			.done();
+	}
+
 	logIn() {
 		var url = authStore.getState().auth.host + '/' + 'api/login';
 
@@ -61,6 +90,8 @@ export default class Settings extends React.Component {
 		}).then((response) => response.json()).then((response) => {
 			if (response.token) {
 				this.setState({ token: response.token });
+
+				this.afterLogIn(response.token);
 
 				authStore.dispatch(setUserName(this.state.username));
 				authStore.dispatch(setToken(response.token));
