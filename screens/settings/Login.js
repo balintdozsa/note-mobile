@@ -75,8 +75,8 @@ export default class Settings extends React.Component {
 		var url = authStore.getState().auth.host + '/' + 'api/login';
 
 		var formBody = new FormData();
-		formBody.append('email', encodeURIComponent(this.state.username));
-		formBody.append('password', encodeURIComponent(this.state.password));
+		formBody.append('email', this.state.username);
+		formBody.append('password', this.state.password);
 
 		fetch(url, {
 			method: "POST",

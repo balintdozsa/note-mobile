@@ -100,7 +100,7 @@ export default class Home extends React.Component {
 
 		var formBody = new FormData();
 		formBody.append('id', id);
-		formBody.append('note', encodeURIComponent(note));
+		formBody.append('note', note); // encodeURIComponent
 
 		fetch(url, {
 			method: "POST",
