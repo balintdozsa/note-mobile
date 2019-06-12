@@ -54,7 +54,7 @@ export default class Settings extends React.Component {
 		formBody.push('token=' + push_token);
 		formBody = formBody.join("&");
 
-		fetch(url + '?' + formBody, {
+		fetch(url, {
 			method: "POST",
 			headers: {
 				'Accept': 'application/json',
