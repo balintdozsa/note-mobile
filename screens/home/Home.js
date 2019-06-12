@@ -98,12 +98,11 @@ export default class Home extends React.Component {
 			url += '/add';
 		}
 
-		var formBody = [];
-		formBody.push('id=' + id);
-		formBody.push('note=' + encodeURIComponent(note));
-		formBody = formBody.join("&");
+		var formBody = new FormData();
+		formBody.append('id', id);
+		formBody.append('note', encodeURIComponent(note));
 
-		fetch(url + '?' + formBody, {
+		fetch(url, {
 			method: "POST",
 			headers: {
 				'Accept': 'application/json',
@@ -135,11 +134,10 @@ export default class Home extends React.Component {
 	deleteNote(id) {
 		var url = authStore.getState().auth.host + '/' + 'api/note/delete';
 
-		var formBody = [];
-		formBody.push('id=' + id);
-		formBody = formBody.join("&");
+		var formBody = new FormData();
+		formBody.append('id', id);
 
-		fetch(url + '?' + formBody, {
+		fetch(url, {
 			method: "POST",
 			headers: {
 				'Accept': 'application/json',

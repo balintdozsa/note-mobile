@@ -50,9 +50,8 @@ export default class Settings extends React.Component {
 		let push_token = await Notifications.getExpoPushTokenAsync();
 		push_token = push_token.replace('ExponentPushToken', '').replace('[', '').replace(']', '');
 
-		var formBody = [];
-		formBody.push('token=' + push_token);
-		formBody = formBody.join("&");
+		var formBody = new FormData();
+		formBody.append('token', push_token);
 
 		fetch(url, {
 			method: "POST",
@@ -75,18 +74,16 @@ export default class Settings extends React.Component {
 	logIn() {
 		var url = authStore.getState().auth.host + '/' + 'api/login';
 
-		var formBody = [];
-		formBody.push('email=' + encodeURIComponent(this.state.username));
-		formBody.push('password=' + encodeURIComponent(this.state.password));
-		formBody = formBody.join("&");
-		console.log(url, formBody);
+		var formBody = new FormData();
+		formBody.append('email', encodeURIComponent(this.state.username));
+		formBody.append('password', encodeURIComponent(this.state.password));
 
-		fetch(url + '?' + formBody, {
+		fetch(url, {
 			method: "POST",
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			//body: formBody
+			body: formBody
 		}).then((response) => response.json()).then((response) => {
 			if (response.token) {
 				this.setState({ token: response.token });
