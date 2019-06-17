@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, ScrollView, TouchableHighlight } from 'react-native';
+import { View, Text, ScrollView, Alert } from 'react-native';
 
 import Colors from '../../constants/Colors';
 import SettingsButton from '../../components/SettingsButton';
@@ -32,6 +32,18 @@ export default class Settings extends React.Component {
 		};
 	}
 
+	logOutConfirm() {
+		Alert.alert(
+			'Log out',
+			'Are you sure?',
+			[
+				{ text: 'Cancel', style: 'cancel', },
+				{ text: 'OK', onPress: () => authStore.dispatch(logOut()) },
+			],
+			{ cancelable: false },
+		);
+	}
+
 	componentWillMount = () => {
 		authStore.subscribe(() => {
 			this.setState({ isLoggedIn: authStore.getState().auth.isLoggedIn > 0, token: authStore.getState().auth.token });
@@ -47,7 +59,7 @@ export default class Settings extends React.Component {
 			authText = (
 				<View>
 					<Text style={{ padding: 20, fontSize: 18, fontWeight: 'bold', color: '#000' }}>{'User: ' + authStore.getState().auth.userName}</Text>
-					<SettingsButton title="Log Out" onPress={() => { authStore.dispatch(logOut()); }} />
+					<SettingsButton title="Log Out" onPress={() => { this.logOutConfirm(); }} />
 				</View>
 			);
 		}

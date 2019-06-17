@@ -11,6 +11,7 @@ import {
 	TouchableHighlight,
 	RefreshControl,
 	TextInput,
+	Alert,
 } from 'react-native';
 import { WebBrowser } from 'expo';
 import { Icon } from 'expo';
@@ -129,6 +130,18 @@ export default class Home extends React.Component {
 		tempStore.dispatch(editNote(note));
 		console.log(tempStore.getState().temp.note);
 		this.setState({ refreshing: false });
+	}
+
+	deleteNoteConfirm(id) {
+		Alert.alert(
+			'Delete',
+			'Are you sure?',
+			[
+				{ text: 'Cancel', style: 'cancel', },
+				{ text: 'OK', onPress: () => this.deleteNote(id) },
+			],
+			{ cancelable: false },
+		);
 	}
 
 	deleteNote(id) {
@@ -254,7 +267,7 @@ export default class Home extends React.Component {
 							justifyContent: 'center',
 							alignItems: 'center',
 							width: 32,
-						}} underlayColor='transparent' onPress={() => { this.deleteNote(currNote.id) }}>
+						}} underlayColor='transparent' onPress={() => { this.deleteNoteConfirm(currNote.id) }}>
 							<Icon.Ionicons
 								name='ios-trash'
 								size={28}
