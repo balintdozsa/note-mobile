@@ -5,7 +5,7 @@ import Colors from '../../constants/Colors';
 import SettingsButton from '../../components/SettingsButton';
 
 import { authStore } from '../../redux/Stores';
-import { logOut } from '../../redux/AuthActions';
+import { logOut } from '../../utils/LogOut';
 
 export default class Settings extends React.Component {
 	state = {
@@ -38,7 +38,7 @@ export default class Settings extends React.Component {
 			'Are you sure?',
 			[
 				{ text: 'Cancel', style: 'cancel', },
-				{ text: 'OK', onPress: () => authStore.dispatch(logOut()) },
+				{ text: 'OK', onPress: () => logOut() },
 			],
 			{ cancelable: false },
 		);
@@ -64,12 +64,12 @@ export default class Settings extends React.Component {
 			);
 		}
 
+		// <SettingsButton title="Token" onPress={() => { alert(authStore.getState().auth.token.substr(authStore.getState().auth.token.length - 16, 16)) }} />
 		return (
 			<View style={{ paddingTop: 0, backgroundColor: Colors.bg, flex: 1 }}>
 				<View style={{ paddingLeft: 15 }}><Text style={{ color: Colors.navBigHeadColor, fontSize: 34, fontWeight: 'bold', marginBottom: 10 }} >Settings</Text></View>
 				<ScrollView style={{ paddingTop: 0, backgroundColor: Colors.bg }}>
 					{authText}
-					<SettingsButton title="Token" onPress={() => { alert(authStore.getState().auth.token.substr(authStore.getState().auth.token.length - 16, 16)) }} />
 				</ScrollView>
 			</View>
 		);

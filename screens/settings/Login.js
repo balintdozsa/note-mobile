@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TextInput, ScrollView, TouchableHighlight } from 'react-native';
+import { View, Text, TextInput, ScrollView, Alert } from 'react-native';
 import { Notifications } from 'expo';
 
 import Colors from '../../constants/Colors';
@@ -8,7 +8,7 @@ import SettingsButton from '../../components/SettingsButton';
 import { HeaderBackButton } from 'react-navigation';
 
 import { authStore } from '../../redux/Stores';
-import { logIn, setUserName, setToken } from '../../redux/AuthActions';
+import { logIn, setUserName, setToken, setPushToken } from '../../redux/AuthActions';
 
 export default class Settings extends React.Component {
 	defaultUsername = '';
@@ -62,11 +62,11 @@ export default class Settings extends React.Component {
 			},
 			body: formBody
 		}).then((response) => {
-			console.log(response);
+			authStore.dispatch(setPushToken(push_token));
 		}).then(() => {
 
 		}).catch((err) => {
-			console.log(err);
+
 		})
 			.done();
 	}
@@ -95,12 +95,17 @@ export default class Settings extends React.Component {
 				authStore.dispatch(logIn());
 
 				this.props.navigation.navigate('Settings');
+			} else {
+				Alert.alert(
+					'Invalid credentials'
+				);
 			}
-			console.log(response);
 		}).then(() => {
 
 		}).catch((err) => {
-			console.log(err);
+			Alert.alert(
+				'Invalid credentials'
+			);
 		})
 			.done();
 	}

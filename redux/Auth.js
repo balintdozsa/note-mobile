@@ -5,6 +5,7 @@ const INITIAL_STATE = {
 	isLoggedIn: 0,
 	userName: '',
 	token: '',
+	pushToken: '',
 };
 
 const auth = (state = INITIAL_STATE, action) => {
@@ -15,6 +16,7 @@ const auth = (state = INITIAL_STATE, action) => {
 		isLoggedIn,
 		userName,
 		token,
+		pushToken,
 	} = state;
 
 	switch (action.type) {
@@ -27,12 +29,16 @@ const auth = (state = INITIAL_STATE, action) => {
 		case 'LOG_OUT':
 			isLoggedIn = 0;
 			token = '';
+			pushToken = '';
 			break;
 		case 'SET_USER_NAME':
 			userName = action.payload;
 			break;
 		case 'SET_TOKEN':
 			token = action.payload;
+			break;
+		case 'SET_PUSH_TOKEN':
+			pushToken = action.payload;
 			break;
 		default:
 			return ret;
@@ -43,6 +49,7 @@ const auth = (state = INITIAL_STATE, action) => {
 		isLoggedIn,
 		userName,
 		token,
+		pushToken,
 	};
 
 	return newState;

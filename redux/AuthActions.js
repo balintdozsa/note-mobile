@@ -30,3 +30,10 @@ export const setToken = token => (
 		payload: token,
 	}
 );
+
+export const setPushToken = pushToken => (
+	{
+		type: 'SET_PUSH_TOKEN',
+		payload: pushToken,
+	}
+);

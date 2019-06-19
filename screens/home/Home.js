@@ -25,6 +25,7 @@ import { pushNotifications } from '../../notifications';
 
 import { authStore, tempStore } from '../../redux/Stores';
 import { editNote } from '../../redux/TempActions';
+import { logOut } from '../../utils/LogOut';
 
 export default class Home extends React.Component {
 	state = {
@@ -71,16 +72,23 @@ export default class Home extends React.Component {
 			},
 			//body: formBody
 		}).then((response) => response.json()).then((response) => {
-			if (response.data) {
+			if (typeof response.data !== 'undefined') {
 				this.setState({ items: response.data });
+			} else if (authStore.getState().auth.token.length) {
+				logOut();
+				this.setState({ items: [] });
+				Alert.alert(
+					'Your session has been expired',
+					'Try to log in again.'
+				);
+				this.props.navigation.navigate('Settings');
 			} else {
 				this.setState({ items: [] });
 			}
 		}).then(() => {
 
 		}).catch((err) => {
-			//this.setState({ items: [] });
-			console.log(err);
+
 		})
 			.done();
 	}
@@ -115,15 +123,14 @@ export default class Home extends React.Component {
 			},
 			body: formBody
 		}).then((response) => response.json()).then((response) => {
-			console.log(response);
+			this.listNotes();
 			if (response.status === "ok") {
-				this.listNotes();
 				this.textInput.clear();
 			}
 		}).then(() => {
 
 		}).catch((err) => {
-			console.log(err);
+
 		})
 			.done();
 	}
@@ -131,7 +138,6 @@ export default class Home extends React.Component {
 	editNote(id, note) {
 		this.values.noteId = id;
 		tempStore.dispatch(editNote(note));
-		console.log(tempStore.getState().temp.note);
 		this.setState({ refreshing: false });
 	}
 
@@ -163,14 +169,12 @@ export default class Home extends React.Component {
 			},
 			body: formBody
 		}).then((response) => response.json()).then((response) => {
-			console.log(response);
-			if (response.status === "ok") {
-				this.listNotes();
-			}
+			this.listNotes();
+			if (response.status === "ok") { ; }
 		}).then(() => {
 
 		}).catch((err) => {
-			console.log(err);
+
 		})
 			.done();
 	}
@@ -242,10 +246,8 @@ export default class Home extends React.Component {
 			</View>
 		);
 
-		console.log(new Date());
 		let i = 0;
 		let notes = this.state.items.map((currNote) => {
-			console.log(currNote);
 			i++;
 			return (
 				<View style={{ marginBottom: 6, padding: 9, borderRadius: 10, backgroundColor: '#fafafa', flexDirection: 'row' }} key={i}>
