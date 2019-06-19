@@ -14,7 +14,7 @@ import {
 	Alert,
 } from 'react-native';
 import { WebBrowser } from 'expo';
-import { Icon } from 'expo';
+import { Icon, Localization } from 'expo';
 
 import { HeaderBackButton } from 'react-navigation';
 
@@ -58,6 +58,8 @@ export default class Home extends React.Component {
 	}
 
 	listNotes() {
+		console.log(Localization.timezone);
+
 		var url = authStore.getState().auth.host + '/' + 'api/note';
 
 		fetch(url, {
@@ -102,6 +104,7 @@ export default class Home extends React.Component {
 		var formBody = new FormData();
 		formBody.append('id', id);
 		formBody.append('note', note); // encodeURIComponent
+		formBody.append('time_zone', Localization.timezone);
 
 		fetch(url, {
 			method: "POST",
@@ -149,6 +152,7 @@ export default class Home extends React.Component {
 
 		var formBody = new FormData();
 		formBody.append('id', id);
+		formBody.append('time_zone', Localization.timezone);
 
 		fetch(url, {
 			method: "POST",
@@ -246,7 +250,7 @@ export default class Home extends React.Component {
 			return (
 				<View style={{ marginBottom: 6, padding: 9, borderRadius: 10, backgroundColor: '#fafafa', flexDirection: 'row' }} key={i}>
 					<View style={{ flex: 1 }}>
-						<Text style={{ fontSize: 14, color: '#999' }}>{currNote.updated_at}</Text>
+						<Text style={{ fontSize: 14, color: '#999' }}>{(new Date(currNote.updated_at.replace(' ', 'T'))).toLocaleString(Localization.locale, { timeZone: Localization.timezone })}</Text>
 						<Text style={{ fontSize: 17, color: '#000' }}>{currNote.note}</Text>
 					</View>
 					<View>
