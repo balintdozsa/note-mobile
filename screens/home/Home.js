@@ -27,6 +27,8 @@ import { authStore, tempStore } from '../../redux/Stores';
 import { editNote } from '../../redux/TempActions';
 import { logOut } from '../../utils/LogOut';
 
+import { MarkdownView } from 'react-native-markdown-view'
+
 export default class Home extends React.Component {
 	state = {
 		refreshing: false,
@@ -249,11 +251,87 @@ export default class Home extends React.Component {
 		let i = 0;
 		let notes = this.state.items.map((currNote) => {
 			i++;
+			let markDown = (<View />);
+			try {
+				markDown = (
+					<MarkdownView styles={{
+						heading1: {
+							fontSize: 40,
+							marginTop: 4,
+							marginBottom: 4,
+							marginLeft: 0,
+							marginRight: 0,
+						},
+						heading2: {
+							fontSize: 36,
+							marginTop: 4,
+							marginBottom: 4,
+							marginLeft: 0,
+							marginRight: 0,
+						},
+						heading3: {
+							fontSize: 32,
+							marginTop: 4,
+							marginBottom: 4,
+							marginLeft: 0,
+							marginRight: 0,
+						},
+						heading4: {
+							fontSize: 28,
+							marginTop: 4,
+							marginBottom: 4,
+							marginLeft: 0,
+							marginRight: 0,
+						},
+						heading5: {
+							fontSize: 24,
+							marginTop: 4,
+							marginBottom: 4,
+							marginLeft: 0,
+							marginRight: 0,
+						},
+						heading6: {
+							fontSize: 19,
+							marginTop: 4,
+							marginBottom: 4,
+							marginLeft: 0,
+							marginRight: 0,
+						},
+						list: { margin: 5 },
+						listItemNumber: {
+							minWidth: 16,
+							paddingRight: 4,
+							fontSize: 17,
+						},
+						listItemBullet: {
+							minWidth: 16,
+							paddingRight: 4,
+							fontSize: 17,
+						},
+						listItemOrderedContent: {
+							flex: 1,
+							fontSize: 17,
+						},
+						listItemUnorderedContent: {
+							flex: 1,
+							fontSize: 17,
+						},
+						paragraph: {
+							fontSize: 17,
+							marginTop: 7,
+							marginBottom: 7,
+						},
+					}} >{currNote.note}</MarkdownView>
+				);
+			} catch (ex) {
+
+			}
+
 			return (
 				<View style={{ marginBottom: 6, padding: 9, borderRadius: 10, backgroundColor: '#fafafa', flexDirection: 'row' }} key={i}>
 					<View style={{ flex: 1 }}>
-						<Text style={{ fontSize: 14, color: '#999' }}>{(new Date(currNote.updated_at.replace(' ', 'T'))).toLocaleString(Localization.locale, { timeZone: Localization.timezone })}</Text>
-						<Text style={{ fontSize: 17, color: '#000' }}>{currNote.note}</Text>
+						<Text style={{ fontSize: 13, color: '#999' }}>{(new Date(currNote.updated_at.replace(' ', 'T'))).toLocaleString(Localization.locale, { timeZone: Localization.timezone })}</Text>
+						{markDown}
 					</View>
 					<View>
 						<TouchableHighlight style={{
